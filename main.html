@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <style>
+              
+            body {background-color: rgba(187, 184, 184, 0.39);}
+            p   {color: rgba(255, 99, 71, 0.74);}
+            h1   {color: rgba(88, 51, 8, 0.678);}    
+        </style>
+        <script src="include.js"> 
+        </script>
+        <p style="font-size:75px">Grammer spell check </p>  </head>
+<body style=text-align:center;>
+ <form id="newform"></form>
+<h1>Show a file-select field which allows only one file to be chosen<h1>
+<form action="/action_page.php">
+  <label for="myfile">Select a file</label>
+  <input type="file" id="myfile" name="myfile"><br><br>
+  <!--<input type="submit">-->
+<textarea name="mytextarea" id="mytextarea" cols="30" rows="4" style="max-width: 500px; width:100%; height:200px; margin-bottom: 20px; "></textarea>
+<div style="text-align:center">  
+  <input type="reset" />  
+</div>  
+
+
+</form>
+
+</body>
+
+
+<script>
+let input = document.querySelector('input')
+
+let textarea = document.querySelector('textarea')
+
+// This event listener has been implemented to identify a
+// Change in the input section of the html code
+// It will be triggered when a file is chosen.
+input.addEventListener('change', () => {
+	let files = input.files;
+
+	if (files.length == 0) return;
+
+	/* If any further modifications have to be made on the
+	Extracted text. The text can be accessed using the
+	file variable. But since this is const, it is a read
+	only variable, hence immutable. To make any changes,
+	changing const to var, here and In the reader.onload
+	function would be advisible */
+	const file = files[0];
+
+	let reader = new FileReader();
+
+	reader.onload = (e) => {
+		const file = e.target.result;
+
+		// This is a regular expression to identify carriage
+		// Returns and line breaks
+		const lines = file.split(/\r\n|\n/);
+		textarea.value = lines.join('\n');
+
+	};
+
+	reader.onerror = (e) => alert(e.target.error.name);
+
+	reader.readAsText(file);
+});
+</script>
+</html>
