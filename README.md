@@ -1,4 +1,4 @@
-# Spellcheck-using-tinymce
+# Spellcheck-using-Tinymce API
 The objective of this work is to perform a spell check tool that analyzes the text entered in search for possible misspellings. Our spellcheck prototype will be able to detect misspelled words in a text input.
 INTRO TO GRAMMAR CHECKING
 Grammar correction services revolve around two important concepts -- a language model and grammar rules. Both of these are foundational pieces to a grammar checker.  The language model is a statistical model that can be used to determine how closely a piece of text matches real language.  It has many uses, but one simple example follows. Consider the sentence, "He went too the store."  Even a basic language model could predict that the following corrected sentence is more likely to be the authors intent: "He went to the store." An accurate language model embodies the syntactical and grammatical patterns of the language that it models.
