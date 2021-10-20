@@ -1,0 +1,83 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=shadow-multiple">
+            <style>
+            body {background-color:#8dceec;}
+            p   {color: #64186e;}
+            h1   {color: #3c2896;}    
+        </style>
+		<script src="<a href="https://cdn.tiny.cloud/1/mqmzuehs5mdaumsgwcn5zkfr517wm8wqvq1byz9h2yafvwx6/tinymce/5/tinymce.min.js">https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js</a>" referrerpolicy="origin"></script>
+		<script>
+		  tinymce.init({
+			selector: "#mytextarea",
+			plugins: [
+			  "advlist autolink lists link image charmap print preview anchor",
+			  "searchreplace visualblocks code fullscreen",
+			  "insertdatetime media table paste tinymcespellchecker"
+			],
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | spellchecker | bullist numlist outdent indent | link image"
+		  });
+		</script>
+        <style>
+			body {
+			  font-family: "Garamond", serif;
+			}
+			</style>
+        <p style="font-size:80px" class="font-effect-shadow-multiple">Grammer Spell Check </p>  </head>
+<body style=text-align:center;>
+ <form id="newform"></form>
+<h1>Displays mistakes in a file and shows suggestions using TinyMCE API<h1>
+<form action="/action_page.php">
+  <label for="myfile">Select a File</label>
+  <input type="file" id="myfile" name="myfile"><br><br>
+  <!--<input type="submit">-->
+<textarea name="mytextarea" id="mytextarea" cols="30" rows="4" style="max-width: 500px; width:100%; height:200px; margin-bottom: 20px; "></textarea>
+<div style="text-align:center">  
+  <input type="reset" />  
+</div>  
+
+
+</form>
+
+</body>
+
+
+<script>
+let input = document.querySelector('input')
+
+let textarea = document.querySelector('textarea')
+
+// This event listener has been implemented to identify a
+// Change in the input section of the html code
+// It will be triggered when a file is chosen.
+input.addEventListener('change', () => {
+	let files = input.files;
+
+	if (files.length == 0) return;
+
+	/* If any further modifications have to be made on the
+	Extracted text. The text can be accessed using the
+	file variable. But since this is const, it is a read
+	only variable, hence immutable. To make any changes,
+	changing const to var, here and In the reader.onload
+	function would be advisible */
+	const file = files[0];
+
+	let reader = new FileReader();
+
+	reader.onload = (e) => {
+		const file = e.target.result;
+
+		// This is a regular expression to identify carriage
+		// Returns and line breaks
+		const lines = file.split(/\r\n|\n/);
+		textarea.value = lines.join('\n');
+
+	};
+
+	reader.onerror = (e) => alert(e.target.error.name);
+
+	reader.readAsText(file);
+});
+</script>
+</html>
